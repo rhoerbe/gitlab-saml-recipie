@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+    web:
+      image: 'gitlab/gitlab-ce:latest'
+      container_name: 21gitlab
+      restart: always
+      hostname: 'gitlab.example.com'
+      environment:
+        GITLAB_OMNIBUS_CONFIG: |
+          external_url 'https://gitlab.test.portalverbund.gv.at'
+      networks:
+        http_proxy:
+          ipv4_address: 10.1.1.21
+      expose:
+        - 8080
+      volumes:
+        - '/dv/21gitlab/etc/:/etc/gitlab:Z'
+        - '/dv/21gitlab/logs:/var/log/gitlab:Z'
+        - '/dv/21gitlab/data:/var/opt/gitlab:Z'
+
+networks:
+  http_proxy:
+    external: true

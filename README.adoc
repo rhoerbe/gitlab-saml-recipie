@@ -1,0 +1,74 @@
+# Kochrezept für einen Gitlab-Server mit SAML
+
+Ein Gitlab Server mit einer STP-Einbindung soll als PoC in der MA14 eingerichtet
+werden.
+
+## Konzept
+
+- Die Anbindung von Gitlab an das STP des Mag Wien erfolgt über SAML. Eine Einbindung
+  über PVP-R-Profil wäre zwar auch möglich, dazu müsste aber ein Omniauth-Provider
+  angepasst werden.
+- Als IDP wird das Standardportal fix eingebunden, also vorläufig ohne IDP-Discovery.
+- Der Omniauth-Provider „saml“ ist nicht PVP-kompatibel, weil wesentlichen Funktionen
+  (vor allem Metadaten) nicht umgesetzt sind.
+- Statt dessen wird der Omniauth-Provider „shibboleth“ verwendet.
+- Gitlab und der Shibboleth SP werden als Docker Container umgesetzt.
+- GitLab CE Docker image: https://registry.hub.docker.com/u/gitlab/gitlab-ce/
+- Docker-shib-sp: https://github.com/identinetics/docker-shib-sp
+- TLS wird an einem externen Reverse Proxy terminiert (Netscaler/prod, Nginx/dev).
+- Der Nginx im Gitlab Container wird deaktiviert, statt dessen hört unicorn auf
+  0.0.0.0:8080 (das ist nur für den PoC OK, für den Prouktionsbetrieb sollte
+  Gitlab-workhorse vor Unicorn vorgespannt werden).
+- Der SAML SP wird ein einem separaten Apache realisiert, der als Reverse
+  Proxy vor den Gitlab-container (unicorn) gestellt wird. Dafür wird das Image
+  Docker-shib-sp eingesetzt.
+
+## Deployment Shibboleth SP
+
+1. Docker Projekt für Shib SP klonen:
+
+   git clone https://github.com/identinetics/docker-shib-sp.git
+   cd docker-shib-sp; git submodule init
+   git submodule update && cd dscripts && git checkout master && cd ..
+
+2. Das eingebundene Subprojekt dscripts enthält scripts für die Docker Befehle
+   build, exec und run. Sie werden über eine Datei conf.sh konfiguriert. Das
+   vom Beispiel aus der PVP-Testumgebung übernommene conf22.sh definiert Image
+   und Container Namen, Volume Mappings und Netzwerkoptionen.
+
+   Für den build ist noch der HTTPS-Proxy zu setzen:
+
+        --build-arg "HTTPS_PROXY=$https-proxy"
+
+   Das entsprechend ARG command ist jetzt auch im Dockerfile. (-> git pull)
+
+   Da das Build wegen der Proxy-Settings nicht funktioniert hat, wurde als Image
+   statt r2h2/gitlabsp22 rhoerbe/gitlabsp22 konfiguriert, das von dockerhub
+   geladen werden kann.
+
+3. Konfiguration des Apache httpd. Das /etc/httpd/* wird von der PVP-Testumgebung
+   kopiert und das vhosts.conf angepasst (Hostname -> vmdev9xxx.adv.magwien.gv.at)
+
+4. Konfiguration des Shibboleth SP. Das vorhandene Zertifikat sp-cert.pem, sp-key.pem
+   wird belassen (-> eh nur PoC), chmod 600 fpr sp-key.pem. In shibboleth2.xml
+   werden die EntityID des SP und des IDP eingetragen.
+
+'''
+Ende der Sitzung vom 19.9.2016.
+
+Weitere Schritte für den 26.9.
+
+'''
+
+
+## Deployment Nginx Proxy
+
+Reverse Proxy einrichten. Benötigt Hostname und Zertifik.
+Docker Projekt: https://github.com/identinetics/docker-nginx
+
+
+
+## Deployment Gitlab Server
+
+- Das Dockerprojekt geladen und lokal ein Image erzeugt.
+- Die Datei docker-compose.yml wird angepasst.
