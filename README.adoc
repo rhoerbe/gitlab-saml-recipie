@@ -56,19 +56,19 @@ werden.
 '''
 Ende der Sitzung vom 19.9.2016.
 
-Weitere Schritte für den 26.9.
-
-'''
-
+Sitzung am 26.9.
 
 ## Deployment Nginx Proxy
 
 Reverse Proxy einrichten. Benötigt Hostname und Zertifik.
 Docker Projekt: https://github.com/identinetics/docker-nginx
 
-
-
 ## Deployment Gitlab Server
 
-- Das Dockerprojekt geladen und lokal ein Image erzeugt.
-- Die Datei docker-compose.yml wird angepasst.
+- Projekt rhoerbe/omnibus-gibtlab clonen.
+- Als Image wird gitlab/gitlab-ce von Dockerhub verwendet
+- Die Datei docker-compose.yml wird von diesem Repe geladen und angepasst.
+
+Sitzung am 3.10.2016
+
+
