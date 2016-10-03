@@ -64,11 +64,14 @@ Reverse Proxy einrichten. Benötigt Hostname und Zertifik.
 Docker Projekt: https://github.com/identinetics/docker-nginx
 
 ## Deployment Gitlab Server
+Für den Gitlab Server braucht es dreierlei: 
 
-- Projekt rhoerbe/omnibus-gibtlab clonen.
-- Als Image wird gitlab/gitlab-ce von Dockerhub verwendet
-- Die Datei docker-compose.yml wird von diesem Repe geladen und angepasst.
+- Das Image gitlab/gitlab-ce von Dockerhub
+- Die Datei docker-compose.yml (in diesem Repo vorkonfiguriert)
+- Die Datei gitlab.rb (in diesem Repo vorkonfiguriert)
 
 Sitzung am 3.10.2016
+
+- docker-compose.yml wird angepasst (Volume Mappings, Netzwerk)
 
 
