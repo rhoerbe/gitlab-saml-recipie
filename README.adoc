@@ -45,6 +45,9 @@ werden.
    Da das Build wegen der Proxy-Settings nicht funktioniert hat, wurde als Image
    statt r2h2/gitlabsp22 rhoerbe/gitlabsp22 konfiguriert, das von dockerhub
    geladen werden kann.
+   Start und Restart erfolgen aus dem Projektverzeichnis mit:
+   
+      dscripts/run.sh [-i] [-p]
 
 3. Konfiguration des Apache httpd. Das /etc/httpd/* wird von der PVP-Testumgebung
    kopiert und das vhosts.conf angepasst (Hostname -> vmdev9xxx.adv.magwien.gv.at)
