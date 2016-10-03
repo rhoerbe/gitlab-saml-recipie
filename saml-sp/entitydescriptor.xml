@@ -1,0 +1,76 @@
+<md:EntityDescriptor entityID="https://vmdev9032.adv.magwien.gv.at/sp.xml"
+                     xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" 
+                     xmlns:alg="urn:oasis:names:tc:SAML:metadata:algsupport"          
+                     xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+                     xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute" 
+                     xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui"          
+                     xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init" >
+  <md:Extensions>
+    <mdattr:EntityAttributes>
+      <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" 
+        Name="http://macedir.org/entity-category" 
+        NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+      <saml:AttributeValue>http://www.ref.gv.at/ns/names/agiz/pvp/egovtoken</saml:AttributeValue>
+     </saml:Attribute>
+    </mdattr:EntityAttributes>
+  </md:Extensions>
+  <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+    <md:Extensions>
+      <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha512"/>
+      <alg:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+      <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>
+      <alg:SigningMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <mdui:UIInfo>
+        <mdui:DisplayName xml:lang="en">MA14 PVP2 gitlab Test</mdui:DisplayName>
+        <mdui:Description xml:lang="en"> 
+            PVP2 Testumgebung gitlab Service
+        </mdui:Description>
+        <mdui:Logo xml:lang="en" height="70" width="79">http://md.test.portalverbund.gv.at/pvpLogo.png</mdui:Logo>
+      </mdui:UIInfo>
+      <init:RequestInitiator Binding="urn:oasis:names:tc:SAML:profiles:SSO:request-init" Location="https://gitlab.test.portalverbund.gv.at/Shibboleth.sso/Login" xmlns:init="urn:oasis:names:tc:SAML:profiles:SSO:request-init"/>
+      <idpdisc:DiscoveryResponse Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://gitlab.test.portalverbund.gv.at/Shibboleth.sso/Login" index="1" xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol"/>
+    </md:Extensions>
+    <md:KeyDescriptor use="signing">
+      <ds:KeyInfo>
+        <ds:KeyName>gitlab.test.portalverbund.gv.at</ds:KeyName>
+        <ds:X509Data>
+          <ds:X509Certificate>
+MIIC6zCCAdOgAwIBAgIJAIkSELDiPK60MA0GCSqGSIb3DQEBBQUAMBcxFTATBgNV
+BAMTDDgyZjdhODMwMmY0ODAeFw0xNjAyMjgxNjE1MjdaFw0yNjAyMjUxNjE1Mjda
+MBcxFTATBgNVBAMTDDgyZjdhODMwMmY0ODCCASIwDQYJKoZIhvcNAQEBBQADggEP
+ADCCAQoCggEBAMOWMUhYcym8FSGzOedG9suMS+aK/culEXn04B84a/zlm9Dxv8wk
+ZXLT071OtQm6Rz9hdkC3e7AqkTeGnLzkpkzvgEjx/ManNoPFBnqfqgL9KE0t+FS2
+gRscy7VKDxdkMvzmXO+3+JjYYqnVVpbFUMFeOMaC74skFhKI8gc/j4a/8DH6TrPd
+SsyKi/k7QeRwP8QfnCapLbsGVTW4G+EuMcP6/Wl2zDcelpxh/dHv325yKCBbPvPC
++k/donPsw8OV4ItzehyOrtjWNCsQscgY+wWCidIMCPOkI3WRIGkeClJoz/dg8gSx
+HWkYacN6lze/xPYELR6WlzB9r2WOKjuHbRcCAwEAAaM6MDgwFwYDVR0RBBAwDoIM
+ODJmN2E4MzAyZjQ4MB0GA1UdDgQWBBQzGCch3EXA37qX6W3AtkE4KBzWSTANBgkq
+hkiG9w0BAQUFAAOCAQEAQP46xsyGllK/xk3Y7PCPkj28KrVwMsKeR8geRq8UswB2
+TQ+qhvWPZs5qUlNc1UGZat4nEu7T837ozJ7OeVNtgaLDLElfnerzss/ip/I0at5U
+g6g+/memzdipXb/5AF76353nK82dRmhO5M6EmVBdeAF1LGQkonmxBRRdMJ1OtGfq
+C9WdsDb3FQWX62QlBFuzf/sq1M/DSn9FHDlLHqtTyFFwGBqX6mlOa1u8e3cpCBpk
+o4WHxK0EHAKWMiSisR+VXm7BHqe6Qg6cnu9sipc3rkL3mXNvcWD4ktpkuxL9zEsd
+dMe4TwGTdA/GjVIW3ia5ouIVVuEaXrw8MlhsUoiIZQ==
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </md:KeyDescriptor>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://gitlab.test.portalverbund.gv.at/Shibboleth.sso/SLO/SOAP"/>
+    <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://gitlab.test.portalverbund.gv.at/Shibboleth.sso/SLO/Redirect"/>
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</md:NameIDFormat>    
+    <md:NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</md:NameIDFormat>    
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://gitlab.test.portalverbund.gv.at/Shibboleth.sso/SAML2/POST-SimpleSign" index="0"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://gitlab.test.portalverbund.gv.at/Shibboleth.sso/SAML2/POST" index="1"/>
+    <md:AssertionConsumerService Binding="urn:oasis:names:tc:SAML:2.0:bindings:PAOS" Location="https://gitlab.test.portalverbund.gv.at/Shibboleth.sso/SAML2/ECP" index="2"/>
+   </md:SPSSODescriptor>
+   <md:Organization>
+       <md:OrganizationName xml:lang="de">Stadt Wien MA14</md:OrganizationName>
+       <md:OrganizationDisplayName xml:lang="de">MA14</md:OrganizationDisplayName>
+       <md:OrganizationURL xml:lang="de">http://www.portalverbund.at</md:OrganizationURL>
+   </md:Organization>
+   <md:ContactPerson contactType="technical">
+       <md:GivenName>Rainer</md:GivenName>
+       <md:SurName>Hoerbe</md:SurName>
+       <md:EmailAddress>rh_testfed_pv_at@mail.hoerbe.at</md:EmailAddress>
+   </md:ContactPerson>  
+ </md:EntityDescriptor>
